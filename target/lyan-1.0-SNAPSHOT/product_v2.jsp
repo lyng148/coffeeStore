@@ -4,6 +4,7 @@
 <%@ page import="java.util.Currency" %>
 <%@ page import="utils.CurrencyService" %>
 <%@ page import="model.Category" %>
+<%@ page import="model.ProductInCart" %>
 <!DOCTYPE html>
 <html lang="en">
     <%@page contentType="text/html" pageEncoding="UTF-8" %>
@@ -37,7 +38,12 @@
     }%>
 
     <%-- Get type from session --%>
-    <% String type = (String) request.getParameter("type");%>
+    <% String type = (String) request.getParameter("type");
+        ArrayList<ProductInCart> cart = new ArrayList<>();
+        if (session.getAttribute("cart") != null) {
+            cart = (ArrayList<ProductInCart>) session.getAttribute("cart");
+        }
+    %>
 
 
     <!-- Top-bar -->
@@ -128,13 +134,70 @@
             display: none !important;
         }
 
+        .cart-icon {
+            position: relative;
+            display: inline-block;
+            right: 8.5%;
+        }
+
+        .cart-icon img {
+            width: 40px; /* Tăng kích thước của biểu tượng giỏ hàng */
+            height: auto;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px; /* Dịch phần tử lên một chút */
+            right: -15px; /* Dịch phần tử sang phải một chút */
+            background-color: red;
+            color: #fff;
+            border-radius: 50%;
+            padding: 6px; /* Tăng kích thước của phần tử */
+            font-size: 14px; /* Tăng kích thước của chữ số */
+            font-family: Arial, sans-serif; /* Sử dụng font chữ Arial */
+            min-width: 20px;
+            text-align: center;
+        }
     </style>
 
 
     <% String productAddedMessage = (String) request.getAttribute("productAddedMessage");
-        if (productAddedMessage != null) {
-            System.out.println(productAddedMessage);%>
-    <div><%=productAddedMessage%></div>
+        if (productAddedMessage != null) {%>
+    <style>
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            background-color: #fff;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 9999;
+        }
+
+        .show {
+            opacity: 1;
+        }
+    </style>
+
+    <div class="notification" id="notification">Sản phẩm đã được thêm vào giỏ hàng</div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var notification = document.getElementById('notification');
+            notification.classList.add('show');
+
+            setTimeout(function () {
+                notification.classList.remove('show');
+            }, 3000);
+        });
+
+    </script>
+
     <% } %>
 
 
@@ -155,6 +218,38 @@
                     <a class="dropdown-item" href="./logout">Đăng xuất</a>
                 </div>
             </div>
+
+            <div class="cart-icon UserCenter" id="cartIcon">
+                <img src="https://i.im.ge/2024/03/17/RN7s6K.bag.th.png" alt="Giỏ hàng" style="width: 40px; height: auto">
+                <div class="cart-count" id="cartCount">0</div>
+            </div>
+
+
+            <script src="script.js"></script>
+            <script>
+
+                // Số lượng sản phẩm trong giỏ hàng được lưu trong biến cartItemCount
+                var cartItemCount = <%= cart.size() %>; // Đổi số lượng sản phẩm ở đây
+
+                // Cập nhật số lượng sản phẩm trong biểu tượng giỏ hàng
+                function updateCartCount() {
+                    var cartCountElement = document.getElementById('cartCount');
+                    cartCountElement.textContent = cartItemCount;
+
+                    // Ẩn phần tử cart-count nếu số lượng sản phẩm là 0
+                    if (cartItemCount === 0) {
+                        cartCountElement.style.display = 'none';
+                    } else {
+                        cartCountElement.style.display = 'block'; // Hiển thị phần tử nếu số lượng sản phẩm không phải là 0
+                    }
+                }
+
+                // Cập nhật số lượng sản phẩm khi trang được tải
+                document.addEventListener('DOMContentLoaded', function () {
+                    updateCartCount();
+                });
+
+            </script>
             <% } %>
         </a>
     </div>
@@ -502,7 +597,10 @@
 
                 <!-- Product Pricing -->
                 <div class="product-price">
-                    <div id="div-price" style="font-size: 26px; color: #e07c51; font-weight: 600"><%= CurrencyService.formatPrice(prod.getPrice())%> đ</div>
+                    <div id="div-price"
+                         style="font-size: 26px; color: #e07c51; font-weight: 600"><%= CurrencyService.formatPrice(prod.getPrice())%>
+                        đ
+                    </div>
                 </div>
 
                 <!-- Product Configuration -->
@@ -516,10 +614,9 @@
                             <button id="medium">Vừa + 6.0000 đ</button>
                             <button id="big">Lớn + 16.000 đ</button>
                         </div>
-
                     </div>
                 </div>
-                <br>
+
                 <label for="quantity">Số lượng</label>
                 <div>
                     <button type="button" onclick="decrement()" class="quantity-button">-</button>
@@ -528,6 +625,7 @@
                 </div>
                 <br><br>
                 <form method="POST" action="./product" id="add-to-cart">
+                    <input type="hidden" id="image-form" name="image-form" value="<%=prod.getImageURL()%>">
                     <input type="hidden" id="title-form" name="title-form" value="<%=prod.getTitle()%>">
                     <input type="hidden" id="price-form" name="price-form" value="">
                     <input type="hidden" id="option-form" name="option-form" value="">
