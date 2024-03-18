@@ -141,7 +141,7 @@
         }
 
         .cart-icon img {
-            width: 40px; /* Tăng kích thước của biểu tượng giỏ hàng */
+            width: 30px; /* Tăng kích thước của biểu tượng giỏ hàng */
             height: auto;
         }
 
@@ -151,12 +151,18 @@
             right: -15px; /* Dịch phần tử sang phải một chút */
             background-color: red;
             color: #fff;
-            border-radius: 50%;
+            border-radius: 50%; /* Biến thành hình tròn */
             padding: 6px; /* Tăng kích thước của phần tử */
             font-size: 14px; /* Tăng kích thước của chữ số */
             font-family: Arial, sans-serif; /* Sử dụng font chữ Arial */
             min-width: 20px;
             text-align: center;
+            width: 30px; /* Thiết lập kích thước */
+            height: 30px; /* Thiết lập kích thước */
+        }
+
+        .name {
+            right: 1%;
         }
     </style>
 
@@ -168,8 +174,8 @@
             position: fixed;
             bottom: 20px;
             right: 30px;
-            background-color: #fff;
-            color: #333;
+            background-color: #e07c51;
+            color: #ffffff;
             padding: 10px 20px;
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -220,7 +226,7 @@
             </div>
 
             <div class="cart-icon UserCenter" id="cartIcon">
-                <img src="https://i.im.ge/2024/03/17/RN7s6K.bag.th.png" alt="Giỏ hàng" style="width: 40px; height: auto">
+                <a href="./cart"><img src="https://i.im.ge/2024/03/17/RN7s6K.bag.th.png" alt="Giỏ hàng" style="width: 40px; height: auto"></a>
                 <div class="cart-count" id="cartCount">0</div>
             </div>
 
@@ -426,55 +432,13 @@
             line-height: 24px;
         }
 
-        .product-color {
-            margin-bottom: 30px;
-        }
-
-        .color-choose div {
-            display: inline-block;
-        }
-
-        .color-choose input[type="radio"] {
-            display: none;
-        }
-
-        .color-choose input[type="radio"] + label span {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            margin: -1px 4px 0 0;
-            vertical-align: middle;
-            cursor: pointer;
-            border-radius: 50%;
-            border: 2px solid #FFFFFF;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
-        }
-
-        .color-choose input[type="radio"]#red + label span {
-            background-color: #C91524;
-        }
-
-        .color-choose input[type="radio"]#blue + label span {
-            background-color: #314780;
-        }
-
-        .color-choose input[type="radio"]#black + label span {
-            background-color: #323232;
-        }
-
-        .color-choose input[type="radio"]:checked + label span {
-            background-image: url(//product.hstatic.net/1000075078/product/1697446642_ca-phe-den-da-tui_a178a9f2d9a84425b5c5397da639bf92_large.jpg);
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
         /* Cable Configuration */
         .size-choose {
             margin-top: 10px;
             margin-bottom: 20px;
         }
 
-        .size-choose button {
+        .quantity-button {
             border: 2px solid #E1E8EE;
             border-radius: 6px;
             padding: 13px 20px;
@@ -483,14 +447,6 @@
             background-color: #fff;
             cursor: pointer;
             transition: all .5s;
-        }
-
-        .size-choose button:hover,
-        .size-choose button:active,
-        .size-choose button:focus {
-            outline: none;
-            background-color: #e07c51;
-            color: white;
         }
 
         .quantity-button:hover,
@@ -610,18 +566,18 @@
                     <div class="size-config">
                         <span style="font-size: 16px">Chọn size (bắt buộc)</span>
                         <div class="size-choose">
-                            <button id="small">Nhỏ + 0 đ</button>
-                            <button id="medium">Vừa + 6.0000 đ</button>
-                            <button id="big">Lớn + 16.000 đ</button>
+                            <button id="small" class="quantity-button">Nhỏ + 0 đ</button>
+                            <button id="medium" class="quantity-button">Vừa + 6.0000 đ</button>
+                            <button id="big" class="quantity-button">Lớn + 16.000 đ</button>
                         </div>
                     </div>
                 </div>
 
                 <label for="quantity">Số lượng</label>
                 <div>
-                    <button type="button" onclick="decrement()" class="quantity-button">-</button>
+                    <button type="button" onclick="decrement()">-</button>
                     <input type="text" id="quantity" name="quantity" value="1" style="">
-                    <button type="button" onclick="increment()" class="quantity-button">+</button>
+                    <button type="button" onclick="increment()">+</button>
                 </div>
                 <br><br>
                 <form method="POST" action="./product" id="add-to-cart">
@@ -631,7 +587,7 @@
                     <input type="hidden" id="option-form" name="option-form" value="">
                     <input type="hidden" id="quantity-form" name="quantity-form" value="">
                     <input type="hidden" id="product-id" name="product-id" value="<%=prod.getId()%>">
-                    <input class="cart-btn" type="submit" value="Thêm vào giỏ hàng">
+                    <input class="cart-btn" type="submit"<% if (user == null ) { %> disabled value="Đăng nhập để thêm vào giỏ hàng" <% } else { %> value="Thêm vào giỏ hàng" <% } %>>
                 </form>
 
             </div>

@@ -80,6 +80,7 @@ public class ProcessProduct extends HttpServlet {
         String option = request.getParameter("option-form");
         System.out.println(option);
         String price = request.getParameter("price-form");
+        price = price.trim();
         System.out.println(price);
         String title = request.getParameter("title-form");
         System.out.println(title);
