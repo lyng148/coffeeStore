@@ -13,7 +13,7 @@ public class CurrencyService {
             formatedPrice = Price.charAt(i) + formatedPrice;
             if (count % 3 == 0 && i != 0)
             {
-                formatedPrice = "," + formatedPrice;
+                formatedPrice = "." + formatedPrice;
             }
         }
         return formatedPrice;

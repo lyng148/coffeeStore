@@ -226,7 +226,8 @@
             </div>
 
             <div class="cart-icon UserCenter" id="cartIcon">
-                <a href="./cart"><img src="https://i.im.ge/2024/03/17/RN7s6K.bag.th.png" alt="Giỏ hàng" style="width: 40px; height: auto"></a>
+                <a href="./cart"><img src="https://i.im.ge/2024/03/17/RN7s6K.bag.th.png" alt="Giỏ hàng"
+                                      style="width: 40px; height: auto"></a>
                 <div class="cart-count" id="cartCount">0</div>
             </div>
 
@@ -587,7 +588,8 @@
                     <input type="hidden" id="option-form" name="option-form" value="">
                     <input type="hidden" id="quantity-form" name="quantity-form" value="">
                     <input type="hidden" id="product-id" name="product-id" value="<%=prod.getId()%>">
-                    <input class="cart-btn" type="submit"<% if (user == null ) { %> disabled value="Đăng nhập để thêm vào giỏ hàng" <% } else { %> value="Thêm vào giỏ hàng" <% } %>>
+                    <input class="cart-btn" type="submit"<% if (user == null ) { %> disabled
+                           value="Đăng nhập để thêm vào giỏ hàng" <% } else { %> value="Thêm vào giỏ hàng" <% } %>>
                 </form>
 
             </div>
@@ -641,7 +643,8 @@
             // Hàm cập nhật giá tiền khi chọn kích thước
             function updatePrice(additionalPrice) {
                 var newPrice = initialPrice + additionalPrice;
-                priceDisplay.textContent = newPrice.toLocaleString() + " đ"; // Cập nhật giá mới và định dạng số
+                var res = formatPrice(newPrice) + " đ";
+                priceDisplay.textContent = res; // Cập nhật giá mới và định dạng số
             }
 
             // Process form submit
@@ -650,11 +653,25 @@
                 return document.getElementById('quantity').value;
             }
 
+            function formatPrice(price) {
+                var tmp = price.toString();
+                var count = 0;
+                var res = "";
+                for (var i = tmp.length - 1; i >= 0; i--) {
+                    count++;
+                    res = tmp.at(i) + res;
+                    if (count % 3 == 0 && i != 0) {
+                        res = "." + res;
+                    }
+                }
+                return res;
+            }
+
             function getPrice() {
                 var price = document.getElementById('div-price');
                 var valueWithComma = price.textContent.trim();
-                var valueWithoutComma = valueWithComma.replace(',', '');
-                return valueWithoutComma.slice(0, -2);
+                var result = valueWithComma.replace('.', '');
+                return result.slice(0, -2);
             }
 
             document.getElementById('add-to-cart').addEventListener('submit', function (event) {

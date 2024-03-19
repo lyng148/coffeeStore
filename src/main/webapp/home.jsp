@@ -128,7 +128,7 @@
                     <%= user.getLast_name() + " " + user.getFirst_name()%>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Thông tin tài khoản</a>
+                    <a class="dropdown-item" href="./infor">Thông tin tài khoản</a>
                     <a class="dropdown-item" href="./logout">Đăng xuất</a>
                 </div>
             </div>

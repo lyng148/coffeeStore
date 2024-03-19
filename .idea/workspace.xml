@@ -36,9 +36,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Add new Servlet" />
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
+        <option value="Add new Servlet" />
       </list>
     </option>
   </component>
@@ -99,7 +99,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/LynG/Downloads/mysql-connector-j-8.0.32.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/LynG/IdeaProjects/lyan/src/main/webapp/resources/Banner&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -108,7 +108,8 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;service.view.auto.scroll.to.source&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -123,7 +124,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\LynG\IdeaProjects\lyan\src\main\webapp\resources\Banner" />
       <recent name="C:\Users\LynG\IdeaProjects\lyan\src\main\webapp" />
+      <recent name="C:\Users\LynG\IdeaProjects\lyan\src\main\java\controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\LynG\IdeaProjects\lyan\src\main\webapp\resources\Banner" />
@@ -316,7 +319,12 @@
       <workItem from="1710660118127" duration="637000" />
       <workItem from="1710690398838" duration="93000" />
       <workItem from="1710691613829" duration="5269000" />
-      <workItem from="1710747512134" duration="3517000" />
+      <workItem from="1710747512134" duration="4832000" />
+      <workItem from="1710773208617" duration="45000" />
+      <workItem from="1710773835318" duration="4583000" />
+      <workItem from="1710778727979" duration="2000" />
+      <workItem from="1710780336966" duration="642000" />
+      <workItem from="1710819543749" duration="324000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
